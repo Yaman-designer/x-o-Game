@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link href="./output.css" rel="stylesheet">
+</head>
+<style>
+    body{
+        background-color: #1A1A1A ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+<body> 
+   <div id="container" class="flex flex-col mb-3 mt-4 items-center justify-center" >
+        <div id="title" class="bg-[#3D3D3D] mt-4 w-70 h-10 rounded-full flex items-center justify-center text-2xl font-semibold text-violet-50  " >
+            <span> X/O </span> Game
+        </div>
+      <div id="box" class="bg-violet-800 p-5 mt-4 rounded-md border-8 border-[#3D3D3D]">
+         <div id="squares" class="grid grid-cols-3 "></div>
+      </div>
+</body>
+<script>
+    const squares = document.getElementById("squares")
+    for (let i = 0; i < 9; i++) {
+    const div = document.createElement("div")
+    div.className =
+        "w-20 h-20  bg-violet-800  flex items-center justify-center text-white text-2xl font-bold hover:bg-violet-900  hover:transition duration-150 ease-in-out border-[#1a1a1a] border-r-5 border-b-5 "
+        squares.appendChild(div)
+    }
+</script>
+</html>
