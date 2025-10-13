@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X/O</title>
-
+    <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">    <link rel="stylesheet" href="./src/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">    <link rel="stylesheet" href="./src/output.css">
+     <!-- Canvas Confetti -->
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 </head>
 <style>
@@ -19,8 +21,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-       font-family: "Shantell Sans", cursive;
-
+        font-family: "Shantell Sans", cursive;
     }
 
 </style>
@@ -47,7 +48,7 @@
       </div>
     <!-- reset btn -->
     <div  class="flex flex-col mb-3 mt-4 items-center justify-center" >
-        <button  type="button"  class="bg-[#4A35A2] mt-1 w-52 h-10 rounded-full flex cursor-pointer  items-center justify-center text-xl font-normal text-amber-50   transition-all duration-300 ease-in-out hover:bg-[#6E56E0] hover:scale-105 active:scale-95" >
+        <button onclick="resetbtn()" type="button"  class="bg-[#4A35A2] mt-1 w-52 h-10 rounded-full flex cursor-pointer  items-center justify-center text-xl font-normal text-amber-50   transition-all duration-300 ease-in-out hover:bg-[#6E56E0] hover:scale-105 active:scale-95" >
           reset
         </button>
     </div>
@@ -58,24 +59,26 @@
     // دالة لنحسب اول مدخل x وبيتغير 
 let turn = 'x'
 let title =document.getElementById("title")
+let gameIsfinished = false
+
 function isclicked(id){
-let element = document.getElementById(id)
-if(turn == 'x'&& element.innerHTML == ""){
-  
+  if (gameIsfinished) return;
+  let element = document.getElementById(id)
+  if(turn == 'x'&& element.innerHTML == ""){
+        let span = document.createElement('span');
+      span.textContent = 'x';
+      span.classList.add('animate__animated', 'animate__bounceIn');
+      element.appendChild(span);
+      turn = 'o'
+      title.innerHTML = 'o'
+  }else if(turn == 'o'&& element.innerHTML == ""){
       let span = document.createElement('span');
-    span.textContent = 'x';
-    span.classList.add('animate__animated', 'animate__bounceIn');
-    element.appendChild(span);
-     turn = 'o'
-     title.innerHTML = 'o'
-}else if(turn == 'o'&& element.innerHTML == ""){
-     let span = document.createElement('span');
-    span.textContent = 'o';
-    span.classList.add('animate__animated', 'animate__bounceIn');
-    element.appendChild(span);
-     turn = 'x'
-     title.innerHTML = 'x'
-}won()
+      span.textContent = 'o';
+      span.classList.add('animate__animated', 'animate__bounceIn');
+      element.appendChild(span);
+      turn = 'x'
+      title.innerHTML = 'x'
+  }won()
 }
 
 // دالة ما بعد تحقق النجاح 
@@ -86,10 +89,15 @@ function reload(num1,num2,num3){
   document.getElementById('item' + num1).style.background = "#c1aa19"
   document.getElementById('item' + num2).style.background = "#c1aa19"
   document.getElementById('item' + num3).style.background = "#c1aa19"
+     
   setInterval(function(){
       title.innerHTML += `.`
   },1000)
-  setTimeout(function(){location.reload()},3000)
+  setTimeout(function(){
+  location.reload()
+  },3000)
+ gameIsfinished = true;
+ celebrate()
 }
 // دالة لنحقق اسلوب النجاح باللعبة
 let squares =[] 
@@ -98,36 +106,50 @@ function won(){
     squares[i] = document.getElementById('item' + i).innerHTML
 
  }
+   if (gameIsfinished) return;
 //  col
- if(squares[1] == squares[2] && squares[2] == squares[3] && squares[1] != '' ){
-reload(1,2,3)
-}
- else if(squares[4] == squares[5] && squares[5] == squares[6] && squares[5] != '' ){
-  reload(4,5,6)
-} else if(squares[7] == squares[8] && squares[8] == squares[9] && squares[9] != '' ){
-  reload(7,8,9)
-}
-//  row
- else if(squares[1] == squares[4] && squares[4] == squares[7] && squares[7] != '' ){
-  reload(1,4,7)
-}
- else if(squares[2] == squares[5] && squares[5] == squares[8] && squares[5] != '' ){
-  reload(2,5,8)
-} else if(squares[3] == squares[6] && squares[6] == squares[9] && squares[9] != '' ){
-  reload(3,6,9)
-}
-// diagonal
- else if(squares[1] == squares[5] && squares[5] == squares[9] && squares[5] != '' ){
-  reload(1,5,9)
-}
- else if(squares[3] == squares[5] && squares[5] == squares[7] && squares[5] != '' ){
-  reload(3,5,7)
-}
+  if(squares[1] == squares[2] && squares[2] == squares[3] && squares[1] != '' ){
+  reload(1,2,3)
+  }
+  else if(squares[4] == squares[5] && squares[5] == squares[6] && squares[5] != '' ){
+    reload(4,5,6)
+  } else if(squares[7] == squares[8] && squares[8] == squares[9] && squares[9] != '' ){
+    reload(7,8,9)
+  }
+  //  row
+  else if(squares[1] == squares[4] && squares[4] == squares[7] && squares[7] != '' ){
+    reload(1,4,7)
+  }
+  else if(squares[2] == squares[5] && squares[5] == squares[8] && squares[5] != '' ){
+    reload(2,5,8)
+  } else if(squares[3] == squares[6] && squares[6] == squares[9] && squares[9] != '' ){
+    reload(3,6,9)
+  }
+  // diagonal
+  else if(squares[1] == squares[5] && squares[5] == squares[9] && squares[5] != '' ){
+    reload(1,5,9)
+  }
+  else if(squares[3] == squares[5] && squares[5] == squares[7] && squares[5] != '' ){
+    reload(3,5,7)
+  }
 }
 
+function resetbtn(){
+  let squares = document.querySelectorAll(".xo-box")
+  for(let square of squares ){
+  square.innerText =""
+  square.style.background =""
+   gameIsfinished = false;
+  }
+}
 
-
-
-
+// زينة
+function celebrate() {
+  confetti({
+    particleCount: 150,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+}
 </script>
 </html>
