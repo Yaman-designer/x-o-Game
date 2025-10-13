@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@tailwind utilities;
+
+@layer components {
+  .xo-box {
+    @apply w-20 h-20 bg-[#EDD645] flex items-center justify-center text-2xl font-medium text-[#1a1a1a] hover:bg-[#c1aa19] cursor-pointer transition duration-300 ease-in ease-in-out border-[#1a1a1a];
+  }
+}
+@import 'animate.css';
