@@ -5,7 +5,7 @@ A clean and interactive **Tic Tac Toe (X.O)** game built with **Vanilla JavaScri
 ---
 
 ## 🎮 Live Demo
-https://your-username.github.io/tic-tac-toe/
+https://Yaman-designer.github.io/tic-tac-toe/
 
 ---
 
