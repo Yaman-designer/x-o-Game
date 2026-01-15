@@ -69,13 +69,6 @@ The score is updated automatically
 The game board resets for the next round
 
 ---
-📦 Run Locally
-git clone https://github.com/Yaman-designer/tic-tac-toe.git
-cd tic-tac-toe
-open index.html
-
-
----
 👩‍💻 Author
 
 yaman
