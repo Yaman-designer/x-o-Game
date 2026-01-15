@@ -4,11 +4,6 @@ A clean and interactive **Tic Tac Toe (X.O)** game built with **Vanilla JavaScri
 
 ---
 
-## 🎮 Live Demo
-https://Yaman-designer.github.io/tic-tac-toe/
-
----
-
 ## ✨ Features
 
 - Classic Tic Tac Toe (X.O) gameplay
@@ -31,6 +26,7 @@ The game logic is fully implemented using **Vanilla JavaScript**, including:
 - Win condition checking
 - Score tracking after each round
 - Automatic game reset while preserving scores
+- Restart button
 
 This project demonstrates strong fundamentals in JavaScript logic and UI interaction.
 
@@ -42,7 +38,7 @@ This project demonstrates strong fundamentals in JavaScript logic and UI interac
 - **CSS3**
 - **Vanilla JavaScript (ES6)**
 
-> No frameworks or libraries were used.
+> No frameworks were used.
 
 ---
 
